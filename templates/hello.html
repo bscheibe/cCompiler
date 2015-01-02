@@ -8,3 +8,13 @@
 {% else %}
   <h1>Hello World!</h1>
 {% endif %}
+<!--<form enctype="multipart/form-data" action="/upload" method="post">
+ 	<input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+    Choose a file to upload: <input name="uploaded_file" type="file"/>
+	<input type="submit" value="Upload" class="upload"/>
+</form>-->
+
+<form action="/" method=post enctype=multipart/form-data>
+  <p><input type=file name=file>
+     <input type=submit value=Upload>
+</form>
