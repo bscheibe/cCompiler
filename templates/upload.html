@@ -1,0 +1,15 @@
+<!doctype html>
+<head>
+	<link rel="stylesheet" href="/static/style.css" />
+</head>
+<title>Hello from Flask</title>
+{% if output %}
+ 	<h1>Hellok {{ output }}!</h1>
+{% else %}
+	<h1>Hello</h1>
+{% endif %}
+
+<form method="get" action="/binaries/output">
+	<button type="submit">Download!</button>
+</form>
+<!-- <a href="/binaries/output" download="output"> -->
