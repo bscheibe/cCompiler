@@ -23,27 +23,39 @@
 			    		<h4 class="ui dividing header">C Code</h4>
 			    		<div class="field">
 			    			{% if code %}
-			    				<textarea name="code">{{ code }}</textarea>
+			    				<textarea id="textbox" name="code">{{ code }}</textarea>
 			    			{% else %}
-			    				<textarea name="code" placeholder="Type some C code here"></textarea>
+			    				<textarea id="textbox" name="code" placeholder="Type some C code here"></textarea>
 			    			{% endif %}
 			    		</div>
 	<!-- 		    		<div class="field">
 							<input class="ui blue button" type='file' name='file'/>
 						</div> -->
 						<div class="field">
-							<input class="ui purple button" type='submit' value='Compile'/>
+							<!-- Semantic can't place the loading icon within the input tag -->
+							<div id="loading" class="ui loading purple button">Loading</div>
+							<input id="compile" class="ui purple button" type='submit' value='Compile'/>
 						</div>
 					</form>
 				</div>
 				<div class="column">
 					<!-- Set max height on box -->
-					{% if cErr %}
-						<h4 class="ui dividing header">Compilation Errors and Warnings</h4>
-					 	<p>{{ cErr }}</p>
-					 	<form method="get" action="/binaries/output">
-							<button class="ui green button" type="submit">Download Binary</button>
-						</form>
+					<h4 class="ui dividing header">Compilation Errors and Warnings</h4>
+					{% if cErr or cSuccess%}
+						<div class="ui primary segment">
+							{% if cErr %}
+						 		<pre class="codeErrs">{{ cErr }}</pre>
+							{% else %}
+								<p>Compilation Successful. No errors or warnings reported.</p>
+							{% endif %}
+						</div>
+						{% if hashFile != "NULL" %}
+						 	<form method="get" action="{{ hashFile }}">
+								<button class="ui green button" type="submit">Download Binary</button>
+							</form>
+						{% else %}
+							<h4>No binary file generated. Please fix errors</h4>
+						{% endif %}
 					{% endif %}
 <!-- 					{% with messages = get_flashed_messages() %}
 					  {% if messages %}
@@ -62,6 +74,7 @@
 
 		<script src='/static/jquery/dist/jquery.min.js'></script>
 		<script src='/static/semantic-ui/dist/semantic.min.js'></script>
+		<script src='/static/script.js'></script>
 <!-- 		<script src="/static/dropzone/dist/min/dropzone.min.js"></script> -->
 	</body>
 </html>

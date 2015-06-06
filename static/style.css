@@ -17,3 +17,14 @@
 input[type="file"] {
 	display: none;
 }
+
+.codeErrs {
+	max-height: 500px;
+	margin: 0;
+	padding-bottom: 10px;
+/*	background: white;*/
+}
+
+#loading {
+	display: none;
+}
