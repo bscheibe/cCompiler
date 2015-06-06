@@ -1,0 +1,22 @@
+{
+  "name": "cCompiler",
+  "version": "0.0.0",
+  "authors": [
+    "Brent Scheibelhut <brent.scheibelhut@gmail.com>"
+  ],
+  "description": "Compiles C on the web",
+  "main": "hello.py",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "semantic-ui": "~1.12.3",
+    "dropzone": "~4.0.1"
+  }
+}

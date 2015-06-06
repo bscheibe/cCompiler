@@ -13,7 +13,7 @@ ALLOWED_EXTENSIONS = set(['c'])
 app.config['UPLOAD_FOLDER'] = os.environ.get('UPLOAD_FOLDER') or '/Users/brentscheibelhut/Documents/Repos/cCompiler/uploads'
 app.config['BINARY_FOLDER'] = os.environ.get('BINARY_FOLDER') or '/Users/brentscheibelhut/Documents/Repos/cCompiler/binaries'
 
-@app.route('/uploadC', methods=['POST'])
+@app.route('/', methods=['GET', 'POST'])
 def upload_file():
     # file = request.files['file']
     # if file and allowed_file(file.filename):
@@ -23,26 +23,47 @@ def upload_file():
     #     return redirect(url_for('uploaded_file',
     #                             filename=filename))
 
-    file = request.files['file']
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        # Might not need to save
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        # return redirect(url_for('uploaded_file', filename=filename))
-        cmd = ['gcc', '-Wall', '-o', os.path.join(app.config['BINARY_FOLDER'], 'output'), os.path.join(app.config['UPLOAD_FOLDER'], filename)] 
-        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        # out = check_output(cmd)
-        # probs don't need, communicate doesn't run until done
-        # p.wait();
-        # out, err = p.communicate()
-        out, err = p.communicate()
+    if request.method == 'POST':
+        file = request.files.get('file')
+        code = request.form.get('code')
+        srcname = 'source.c'
+        error = "Error Uploading"
 
-        print "Output: " + out
-        print "Errors or Warning: " + err
+        if file and code:
+            error = "Error must have one or the other"
+        elif file or code:
+            if allowed_file(srcname):
+                if file:
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                elif code:
+                    if allowed_file(srcname):
+                        outfile=open(srcname,'w');  
+                        outfile.write(code);  
+                        outfile.close(); 
 
-        return render_template('upload.html', output=err)
-    return "Error uploading"
+                # return redirect(url_for('uploaded_file', filename=filename))
+                source=srcname
+                if file:
+                    source = os.path.join(app.config['UPLOAD_FOLDER'], srcname)
 
+                cmd = ['gcc', '-Wall', '-o', os.path.join(app.config['BINARY_FOLDER'], 'output'), source] 
+                p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                out, err = p.communicate()
+
+                print "Output: " + out
+                print "Errors or Warning: " + err
+
+                # flash(err)
+                # Need hased filename to return
+                return render_template('index.html', cErr=err, code=code)
+            else:
+                error = "Error: Unallowed filename"
+
+            #return render_template('upload.html', output=err)
+
+        return render_template('index.html', error=error, code=code)
+    else: 
+        return render_template('index.html')
     #subprocess.call(["./"+execname]);  
 
 @app.route('/uploads/<filename>')
@@ -54,10 +75,6 @@ def uploaded_file(filename):
 def binary_file(filename):
     return send_from_directory(app.config['BINARY_FOLDER'],
                                filename)
-
-@app.route('/')
-def hello():
-	return render_template('index.html')
 
 @app.errorhandler(404)
 def page_not_found(error):

@@ -1,16 +1,67 @@
 <!doctype html>
-<head>
-	<link rel="stylesheet" href="/static/style.css" />
-</head>
-<title>Hello from Flask</title>
-<h1>Hello there</h1>
-<!--<form enctype="multipart/form-data" action="/upload" method="post">
- 	<input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-    Choose a file to upload: <input name="uploaded_file" type="file"/>
-	<input type="submit" value="Upload" class="upload"/>
-</form>-->
+<html>
+	<head>
+		<link rel="stylesheet" href="/static/semantic-ui/dist/semantic.min.css" />
+<!-- 		<link rel="stylesheet" href="/static/dropzone/dist/min/basic.min.css" />
+		<link rel="stylesheet" href="/static/dropzone/dist/min/dropzone.min.css" /> -->
+		<link rel="stylesheet" href="/static/style.css" />
+		<title>Hello from Flask</title>
+	</head>
+	<body>
+		<!--<form enctype="multipart/form-data" action="/upload" method="post">
+		 	<input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+		    Choose a file to upload: <input name="uploaded_file" type="file"/>
+			<input type="submit" value="Upload" class="upload"/>
+		</form>-->
+		<div class="ui two column page padded grid">
+		    <div class="two column row medium-margin-top">
+		    	<h1>C Compiler</h1>
+			</div>
+		    <div class="two column row">
+		    	<div class="column">
+			    	<form class="ui form" action="/" method='post' enctype='multipart/form-data'>
+			    		<h4 class="ui dividing header">C Code</h4>
+			    		<div class="field">
+			    			{% if code %}
+			    				<textarea name="code">{{ code }}</textarea>
+			    			{% else %}
+			    				<textarea name="code" placeholder="Type some C code here"></textarea>
+			    			{% endif %}
+			    		</div>
+	<!-- 		    		<div class="field">
+							<input class="ui blue button" type='file' name='file'/>
+						</div> -->
+						<div class="field">
+							<input class="ui purple button" type='submit' value='Compile'/>
+						</div>
+					</form>
+				</div>
+				<div class="column">
+					<!-- Set max height on box -->
+					{% if cErr %}
+						<h4 class="ui dividing header">Compilation Errors and Warnings</h4>
+					 	<p>{{ cErr }}</p>
+					 	<form method="get" action="/binaries/output">
+							<button class="ui green button" type="submit">Download Binary</button>
+						</form>
+					{% endif %}
+<!-- 					{% with messages = get_flashed_messages() %}
+					  {% if messages %}
+					    <ul class='flashes'>
+					    {% for message in messages %}
+					      <li>{{ message }}</li>
+					    {% endfor %}
+					    </ul>
+					  {% endif %}
+					{% endwith %}
+					{% block body %}{% endblock %} -->
+				</div>
+		    </div>
 
-<form action="/uploadC" method='post' enctype=multipart/form-data>
-  <p><input type=file name=file>
-     <input type=submit value=Upload>
-</form>
+	  	</div>
+
+		<script src='/static/jquery/dist/jquery.min.js'></script>
+		<script src='/static/semantic-ui/dist/semantic.min.js'></script>
+<!-- 		<script src="/static/dropzone/dist/min/dropzone.min.js"></script> -->
+	</body>
+</html>

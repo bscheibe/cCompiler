@@ -1,4 +1,19 @@
-html, body {
-	background: red;
-	background-color: red;
+.medium-margin-top {
+	margin-top: 50px;
+}
+
+.medium-margin-bottom {
+	margin-bottom: 50px;
+}
+
+.dropzone {
+	border: 2px dashed #0087F7;
+}
+
+.dropzone input {
+	display: none;
+}
+
+input[type="file"] {
+	display: none;
 }
