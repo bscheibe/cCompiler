@@ -5,7 +5,7 @@ double av(int a, int b, int);
 
 main(void)
 {
-        int n1, n2, n3
+        int n1, n2, n3;
 
         printf("Enter: ");
         scanf("%d %d %d", &n1, &n2, &n3);
