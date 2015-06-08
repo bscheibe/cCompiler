@@ -1,28 +1,23 @@
-.medium-margin-top {
-	margin-top: 50px;
+.ui.grid.medium-padding-top {
+	padding-top: 50px;
 }
 
-.medium-margin-bottom {
-	margin-bottom: 50px;
-}
-
-.dropzone {
+/*.dropzone {
 	border: 2px dashed #0087F7;
 }
 
 .dropzone input {
 	display: none;
-}
+}*/
 
-input[type="file"] {
+/*input[type="file"] {
 	display: none;
-}
+}*/
 
 .codeErrs {
-	max-height: 500px;
-	margin: 0;
-	padding-bottom: 10px;
-/*	background: white;*/
+	max-height     : 500px;
+	margin         : 0;
+	padding-bottom : 10px;
 }
 
 #loading {

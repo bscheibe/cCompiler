@@ -1,8 +1,10 @@
+// Implements a loading button - don't use show b/c sets to display: block
 $( '#compile' ).click(function() {
   $('#loading').css( "display", "inline-block")  
   $('#compile').hide();
 });
 
+// Leaving so I can implement shift + tabbing
 // var map = []; // Or you could call it "key"
 // onkeydown = onkeyup = function(e){
 //     e = e || event; // to deal with IE
@@ -10,6 +12,7 @@ $( '#compile' ).click(function() {
 //     /*insert conditional here*/
 // }
 
+// Allows tabbing for the user w/in the textarea
 $(document).delegate('#textbox', 'keydown', function(e) {
   var keyCode = e.keyCode || e.which;
 

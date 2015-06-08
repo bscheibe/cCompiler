@@ -1,32 +1,20 @@
-<!-- <!doctype html>
+<!doctype html>
 <html>
 	<head>
 		<link rel="stylesheet" href="/static/semantic-ui/dist/semantic.min.css" />
+<!-- 		<link rel="stylesheet" href="/static/dropzone/dist/min/basic.min.css" />
+		<link rel="stylesheet" href="/static/dropzone/dist/min/dropzone.min.css" /> -->
 		<link rel="stylesheet" href="/static/style.css" />
-		<title>Brent's C Compiler</title>
+		<title>{% block title %}{% endblock %} - Brent Scheibelhut</title>
 	</head>
 	<body>
-		<div class="ui two column page padded grid">
-		    <div class="two column row medium-margin-top">
-		    	<h1>C Compiler</h1>
-			</div>
-		    <div class="two column">
-		    	<form class="ui form" action="/uploadC" method='post' enctype='multipart/form-data'>
-		    		<h4 class="ui dividing header">C Code</h4>
-		    		<div class="field">
-		    			<textarea name="code" placeholder="Type some C code here"></textarea>
-		    		</div>
-		    		<div class="field">
-						<input class="ui blue button" type='file' name='file'/>
-					</div>
-					<div class="field">
-						<input class="ui purple button" type='submit' value='Compile'/>
-					</div>
-				</form>
-		    </div>
-	  	</div>
+		<div class="ui two column page padded grid medium-padding-top">
+			{% block content %}{% endblock %}
+		</div>
 
 		<script src='/static/jquery/dist/jquery.min.js'></script>
 		<script src='/static/semantic-ui/dist/semantic.min.js'></script>
+		<script src='/static/script.js'></script>
+<!-- 		<script src="/static/dropzone/dist/min/dropzone.min.js"></script> -->
 	</body>
-</html> -->
+</html>

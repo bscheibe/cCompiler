@@ -3,7 +3,7 @@
 void print_it(int n1, int n2, int n3, double av);
 double av(int a, int b, int);
 
-main(void)
+int main(void)
 {
         int n1, n2, n3;
 
